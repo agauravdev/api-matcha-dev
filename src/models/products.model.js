@@ -7,19 +7,20 @@ const productSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+        minLength: [300, 'Description should be minimum 300 letters'],
     },
     price: {
         type: Number,
-        required: true,
+        required: [true, 'Price is required'],
     },
     discount: {
         type: Number,
-        min: 0,
-        max: 0.9,
+        min: [0, 'Discount can\'t be negative'],
+        max: [0.9, 'Discount cannot be more than 90%'],
     },
     delivery:{
         type: Number,
-        min: 1,
+        min: [1, 'Delivery cannot be made on the same day'],
     },
     details: {
         type: Object,
@@ -38,6 +39,7 @@ const productSchema = new mongoose.Schema({
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        // required: true
     },
     questions: {
         type: [

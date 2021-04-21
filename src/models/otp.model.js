@@ -3,15 +3,16 @@ const mongoose = require('mongoose');
 const otpSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: [true, 'UserId is required to add OTP']
     },
     otp : {
         type: Number,
-        required: true,
+        required: [true, 'OTP is required'],
     },
     expire: {
         type: Date,
-        required: true,
+        required: [true, 'expiry date is required'],
     }
 }, { timestamps: true });
 
