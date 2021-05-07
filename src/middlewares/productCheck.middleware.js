@@ -7,7 +7,6 @@ const isValidObjectId = require("../utils/isObjectId.util");
 const productCheck = asyncHandler(async (req, res, next) => {
     const { productId } = req.body || req.params.id;
 
-    console.log("Here");
     let product;
 
     if (isValidObjectId(productId)) {

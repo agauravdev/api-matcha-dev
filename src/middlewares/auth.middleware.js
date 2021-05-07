@@ -1,7 +1,11 @@
+const { verifyToken } = require("../utils/jwt");
+
 const auth = (req, res, next) => {
-    const token = req.header('Authorization');
+    const token = req.headers.authorization?.replace(/Bearer /, '');
+    console.log({token});
     if(token) {
-        req.user = {type: "admin", name: "Gaurav", _id: "507f1f77bcf86cd799439011"};
+        req.user = verifyToken(token);
+        console.log("in auth", req.user);
     }
     next();
 }

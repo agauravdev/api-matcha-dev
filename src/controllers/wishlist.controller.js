@@ -2,8 +2,9 @@ const Wishlists = require("../models/wishlist.model");
 const asyncHandler = require("../utils/asyncHandler.util");
 
 const getWishlist = asyncHandler(async (req, res) => {
-    const wishlist = await Wishlist.findOne({ user: req.user._id });
-    res.json(cart.products || []);
+    console.log("in wishlist", req.user);
+    const wishlist = await Wishlists.findOne({ user: req.user._id });
+    res.json(wishlist?.products || []);
 });
 
 const addToWishlist = asyncHandler(async (req, res) => {
@@ -20,8 +21,6 @@ const addToWishlist = asyncHandler(async (req, res) => {
     }
 
     const itemIndex = wishlist.products.findIndex((product) => product.toString() === productId);
-    console.log(wishlist.products);
-    console.log({itemIndex});
 
     if (itemIndex >= 0) {
         return res.status(200).json(wishlist.products);

@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        minLength: [300, 'Description should be minimum 300 letters'],
+        minLength: [100, 'Description should be minimum 100 letters'],
     },
     price: {
         type: Number,
@@ -31,15 +31,20 @@ const productSchema = new mongoose.Schema({
     mainImage: {
         type: String
     },
+    //ToDo make this default value draft when in prod
     status: {
         type: String, //ENUM : ACTIVE, DRAFT, DELETED
         required: true,
-        default: "Draft"
+        default: "Active"
     },
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         // required: true
+    },
+    //ToDo make this required and impletent it
+    availableInStock: {
+        type: Number,
     },
     questions: {
         type: [

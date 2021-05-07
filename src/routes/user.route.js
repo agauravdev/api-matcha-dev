@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const { registerUser, loginUser, updateUser, updatePassword, getSelfProfile } = require("../controllers/user.controller");
-const userRouter = express.Router();
 const auth = require("../middlewares/auth.middleware");
 const Users = require("../models/user.model");
 const asyncHandler = require("../utils/asyncHandler.util");
 
-userRouter.post('/', registerUser);
+// I thought it would be more descriptive to add register in the url.
+router.post('/register', registerUser);
+router.post('/login', loginUser);
 
-userRouter.use(auth);
+router.use(auth);
 
 router.get('/', getSelfProfile);
 
@@ -29,8 +30,8 @@ router.param('id', asyncHandler(async (req, res, next, id) => {
 
 router.post('/:id', updateUser)
 
-router.post('/login', loginUser);
+
 
 router.post("/updatePassword", updatePassword);
 
-module.exports = userRouter;
+module.exports = router;
