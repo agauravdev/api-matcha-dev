@@ -54,7 +54,11 @@ const updateCart = asyncHandler(async (req, res) => {
 
     if(itemIndex === -1) {
         cart.products.push({product: productId, quantity : quantity || 1})
-    } else cart.products[itemIndex].quantity = quantity || cart.products[itemIndex].quantity + 1;
+    } else {
+        if(quantity === 0) {
+            cart.products.splice(itemIndex, 1);
+        } else cart.products[itemIndex].quantity = quantity || cart.products[itemIndex].quantity + 1;
+    }
 
     await cart.save();
 
